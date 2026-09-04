@@ -8,7 +8,6 @@ When a camera records a video, it is actually capturing many images very quickly
 
 So I can think of a video like this:
 
-```text
 Frame 1 → Frame 2 → Frame 3 → Frame 4 → Frame 5 → ...
 
 When these frames are displayed quickly, we see movement.
@@ -38,12 +37,12 @@ Instead of us having to build everything from zero, MediaPipe provides different
 For example:
 
 MediaPipe
-   │
-   ├── Hand Landmarker
-   ├── Face Landmarker
-   ├── Pose Landmarker
-   ├── Object Detector
-   └── Gesture Recognizer
+│
+├── Hand Landmarker
+├── Face Landmarker
+├── Pose Landmarker
+├── Object Detector
+└── Gesture Recognizer
 
 So if I give MediaPipe a frame containing a person, I can choose the appropriate task depending on what I want to detect.
 
@@ -73,9 +72,9 @@ It can give us 21 important points on that hand.
 
 For example:
 
-0  → Wrist
-4  → Thumb tip
-8  → Index finger tip
+0 → Wrist
+4 → Thumb tip
+8 → Index finger tip
 12 → Middle finger tip
 16 → Ring finger tip
 20 → Pinky tip
@@ -114,17 +113,17 @@ Landmarks are important points detected by MediaPipe that allow us to represent 
 I understand the process like this:
 
 Camera
-   ↓
+↓
 Frame
-   ↓
+↓
 BGR → RGB
-   ↓
+↓
 MediaPipe
-   ↓
+↓
 Landmarks / Detections
-   ↓
+↓
 Analyze the coordinates
-   ↓
+↓
 Make a decision
 
 For example, the camera captures a student.
@@ -144,15 +143,15 @@ Then our program can analyze those landmarks.
 For example:
 
 Student's hand
-      ↓
+↓
 Hand landmarks
-      ↓
+↓
 Get wrist/fingertip positions
-      ↓
+↓
 Calculate distances
-      ↓
+↓
 Check our rules
-      ↓
+↓
 Normal or suspicious?
 
 This is how I understand that a computer can go from simply seeing an image to analyzing a person's movement.
@@ -176,24 +175,24 @@ Gesture recognition takes the information from the hand landmarks and uses it to
 So I understand the process as:
 
 RGB Frame
-    ↓
+↓
 Hand Landmarker
-    ↓
+↓
 21 Hand Landmarks
-    ↓
+↓
 Gesture Recognition
-    ↓
+↓
 Gesture Category
 
 For example:
 
 21 landmarks
-     ↓
+↓
 Analyze their positions
-     ↓
+↓
 Thumb is extended
 Other fingers are closed
-     ↓
+↓
 "Thumbs Up"
 
 MediaPipe has some built-in gestures such as:
@@ -216,49 +215,49 @@ The main thing I have understood is that the classroom monitoring system will no
 It will process the video step by step.
 
 Camera
-   ↓
+↓
 Frames
-   ↓
+↓
 OpenCV
-   ↓
+↓
 RGB Frame
-   ↓
+↓
 MediaPipe
-   ↓
+↓
 Landmarks / Objects / Gestures
-   ↓
+↓
 Geometry + Rules
-   ↓
+↓
 Decision
-   ↓
+↓
 Alert if necessary
 
 For example, if we want to detect suspicious behavior:
 
 Student's hand
-      ↓
+↓
 Hand landmarks
-      ↓
+↓
 Where is the hand?
-      ↓
+↓
 Is it close to another student's hand?
-      ↓
+↓
 Check for several frames
-      ↓
+↓
 Possibly suspicious
-      ↓
+↓
 Trigger alert
 
 Similarly, we could use body or face landmarks:
 
 Face landmarks
-      ↓
+↓
 Head direction
-      ↓
+↓
 Is the student looking toward another student?
-      ↓
+↓
 Check if this continues for several frames
-      ↓
+↓
 Possibly suspicious
 
 So my understanding is that MediaPipe provides the information, while our own decision logic determines what that information means for the classroom monitoring system.
@@ -297,8 +296,7 @@ OUR DECISION LOGIC
         ↓
 
 ACTION
-"Continue watching or trigger an alert."
-8.  I Am Still Worried/Unclear About
+"Continue watching or trigger an alert." 8. I Am Still Worried/Unclear About
 
 How do we track one student over time?
 
@@ -326,4 +324,3 @@ Frame → MediaPipe → Landmarks → Gesture/Movement Analysis → Decision
 The part I understand best is how the camera produces frames, how MediaPipe processes those frames, and how landmarks give us numerical positions.
 
 The part I want to understand better is how we go from these landmarks to reliable suspicious-behavior detection, especially when there are multiple students and normal movements that could look suspicious.
-```
