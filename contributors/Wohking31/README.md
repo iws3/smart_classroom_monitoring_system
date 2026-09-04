@@ -321,6 +321,4 @@ At this stage, I understand the foundation as:
 
 Frame → MediaPipe → Landmarks → Gesture/Movement Analysis → Decision
 
-The part I understand best is how the camera produces frames, how MediaPipe processes those frames, and how landmarks give us numerical positions.
-
 The part I want to understand better is how we go from these landmarks to reliable suspicious-behavior detection, especially when there are multiple students and normal movements that could look suspicious.
