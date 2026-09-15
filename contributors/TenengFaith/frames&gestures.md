@@ -28,3 +28,4 @@ I recently started exploring computer vision and real-time processing. this is a
 * **Library / Framework:** MediaPipe, OpenCV
 * **Models:** `hand_landmarker.task`, `gesture_recognizer.task`
 * **Source:** Live Webcam Feed
+
