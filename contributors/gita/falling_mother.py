@@ -14,6 +14,25 @@ def landmarks_visible(lm, indices):
     return all(lm[i].visibility>=MIN_VISIBILITY for i in indices)
 
 
+def body_bbox_aspect_ratio(lm, h, w):
+    visible_points=[(p.x*w, p.y*h) for p in lm if p.visibility>=MIN_VISIBILITY]
+    if len(visible_points) < 4:
+        return None
+
+    xs=[p[0] for p in visible_points]
+    ys=[p[1] for p in visible_points]
+    # print(f"x values: {xs}")
+    # print(f"y values: {ys}")
+    box_w=max(xs)-min(xs)
+    box_h=max(ys)-min(ys)
+    if box_h < 1e-3:
+        return None
+    return box_w/box_h 
+
+
+
+
+
 
 POSE_CONNECTIONS=vision.PoseLandmarksConnections.POSE_LANDMARKS
 JOINT_STYLE = vision.drawing_utils.DrawingSpec(
@@ -68,9 +87,16 @@ def main():
             )
             torsor_visibility=landmarks_visible(lm, [L_SHOULDER, R_SHOULDER, L_HIP, R_HIP])
             aspect_ratio=body_bbox_aspect_ratio(lm, w, h)
+
+            # if aspect_ratio < 1.5:
+
             if frame_count%40==0:
                 if torsor_visibility:
                     print("All parts are visible......")
+                if aspect_ratio < 1.3:
+                    print("standing up")
+                else:
+                    print("lying down")
 
         cv2.imshow("Fall Detecion", frame)
         if cv2.waitKey(1) & 0xFF==ord('q'):
